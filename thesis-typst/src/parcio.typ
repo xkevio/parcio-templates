@@ -153,15 +153,17 @@
   show raw: set text(..mono-args)
   show raw.where(block: true): r => {
     set par(justify: false)
+
+    let lines = _highlight-lines.get()
+    let hl-box = box.with(width: 100%, fill: green.lighten(50%), outset: (y: .25em))
+    
     show raw.line: l => {
-      box(table(
+      box(grid(
         columns: (-1.25em, 100%),
-        stroke: 0pt,
-        inset: 0em,
         column-gutter: 1em,
         align: (x, y) => if x == 0 { right } else { left },
         text(fill: ovgu-darkgray, str(l.number)),
-        l.body,
+        if l.number in lines { hl-box(l.body) } else { l.body }
       ))
     }
     

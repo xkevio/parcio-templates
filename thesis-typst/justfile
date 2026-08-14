@@ -1,6 +1,6 @@
 set default-list := true
 
-VERSION := `grep -oP '(?<=version = ")[^"]+' typst.toml`
+VERSION := replace_regex(read("typst.toml"), '(?s).*version = "([^"]+)".*', '$1')
 DATA_DIR := if os() == "windows" {
      "%APPDATA%"
 } else if os() == "macos" {

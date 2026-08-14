@@ -14,6 +14,8 @@
 #let _LARGE = 20.74pt
 #let _huge = 24.88pt
 
+#let _highlight-lines = state("highlight-lines", ())
+
 /* ---- Convencience functions ---- */
 
 #let mono-args = arguments(font: "Inconsolata", size: 12pt * 0.95)
@@ -62,6 +64,10 @@
 // Fully empty page, no page numbering.
 #let empty-page = page([], footer: [])
 
+#let raw-hl(lines: (), ..args) = {
+  _highlight-lines.update(x => lines)
+  raw(..args)
+}
 // Subfigures.
 #let subfigure = subpar.grid.with(
   grid-styles: body => { set grid(gutter: 0em); body },
